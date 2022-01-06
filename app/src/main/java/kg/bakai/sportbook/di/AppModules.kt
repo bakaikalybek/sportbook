@@ -11,7 +11,6 @@ import kg.bakai.sportbook.data.repository.RecordsRepositoryImpl
 import kg.bakai.sportbook.domain.repository.PreferenceRepository
 import kg.bakai.sportbook.domain.repository.RecordsRepository
 import kg.bakai.sportbook.presentation.login.LoginViewModel
-import kg.bakai.sportbook.presentation.login.onboarding.OnboardingViewModel
 import kg.bakai.sportbook.presentation.main.MainViewModel
 import kg.bakai.sportbook.presentation.records.RecordsViewModel
 import org.koin.android.ext.koin.androidApplication
@@ -41,7 +40,6 @@ val repositoryModule = module {
 val viewModelModule = module {
     viewModel { MainViewModel(get()) }
     viewModel { RecordsViewModel(get()) }
-    viewModel { OnboardingViewModel(get()) }
     viewModel { LoginViewModel(get()) }
 }
 

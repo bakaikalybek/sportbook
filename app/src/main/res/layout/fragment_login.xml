@@ -6,30 +6,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.login.login.LoginFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="Знакомство"
-            app:titleCentered="true"/>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_next_login"
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/btn_login_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:textSize="14sp"
-        app:cornerRadius="20dp"
-        android:fontFamily="@font/product"
+        app:icon="@drawable/ic_baseline_arrow_forward_24"
+        android:text="Next"
+        android:backgroundTint="@android:color/holo_orange_dark"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="16dp"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/login_view_pager"

@@ -15,7 +15,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OnboardingFragment : Fragment() {
     private lateinit var binding: FragmentOnboardingBinding
-    private val onboardingViewModel by viewModel<OnboardingViewModel>()
     private val loginViewModel by sharedViewModel<LoginViewModel>()
 
     private val adapter = OnboardingAdapter()
@@ -51,13 +50,13 @@ class OnboardingFragment : Fragment() {
                 }
             }
         }
-        onboardingViewModel.slides.observe(viewLifecycleOwner) { slides ->
+        loginViewModel.slidesOnboarding.observe(viewLifecycleOwner) { slides ->
             adapter.submitItems(slides)
         }
     }
 
     private fun finishOnboarding() {
         findNavController().navigate(OnboardingFragmentDirections.actionOnboardingFragmentToLoginFragment())
-        onboardingViewModel.finishOnboarding()
+        loginViewModel.finishOnboarding()
     }
 }
