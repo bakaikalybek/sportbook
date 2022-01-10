@@ -36,9 +36,9 @@ class OnboardingFragment : Fragment() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     if (position == adapter.itemCount - 1) {
-                        btnOnboarding.text = "Start"
+                        btnOnboarding.text = "Приступить"
                     } else {
-                        btnOnboarding.text = "Next"
+                        btnOnboarding.text = "Следующий"
                     }
                 }
             })

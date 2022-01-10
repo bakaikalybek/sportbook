@@ -1,22 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.main.MainFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
-        <com.google.android.material.appbar.MaterialToolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="Home"
-            app:titleTextColor="@color/white"/>
-    </com.google.android.material.appbar.AppBarLayout>
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingVertical="16dp">
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Привет, пользователь!"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:fontFamily="@font/product" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Это твой прогресс"
+            android:fontFamily="@font/product"/>
+    </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Обзор"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/product"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            app:cardCornerRadius="16dp"
+            android:backgroundTint="@android:color/holo_orange_dark">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+                <TextView
+                    android:id="@+id/tv_weight_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Вес"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/product"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+                <ProgressBar
+                    android:id="@+id/progress_bar_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:indeterminateOnly="false"
+                    android:progress="60"
+                    android:progressDrawable="@drawable/shape_circle"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintTop_toBottomOf="@id/tv_weight_header"/>
+                <TextView
+                    android:id="@+id/tv_user_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:textAlignment="center"
+                    android:text="61 kg"
+                    android:textSize="48sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/product"
+                    app:layout_constraintBottom_toBottomOf="@id/progress_bar_weight"
+                    app:layout_constraintTop_toTopOf="@id/progress_bar_weight" />
+
+                <TextView
+                    android:id="@+id/tv_goal_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Goal weight: 70.0 kg"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/product"
+                    app:layout_constraintTop_toBottomOf="@id/progress_bar_weight"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_goal_weight_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="You need 18 kg to gain"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/product"
+                    app:layout_constraintTop_toBottomOf="@id/tv_goal_weight"
+                    app:layout_constraintStart_toStartOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:layout_marginStart="4dp"
+            app:cardCornerRadius="16dp"
+            android:backgroundTint="@android:color/holo_orange_light">
+            <TextView
+                android:id="@+id/tv_user_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:textAlignment="center"
+                android:text="185 cm"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:fontFamily="@font/product"/>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</LinearLayout>

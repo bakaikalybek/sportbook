@@ -1,8 +1,9 @@
 package kg.bakai.sportbook.domain.model
 
 data class User(
-    val name: String,
-    val currentWeight: Double,
-    val currentHeight: Double,
-    val age: Int
+    val name: String?,
+    var currentWeight: Float?,
+    val currentHeight: Float?,
+    var goalWeight: Float?,
+    val age: Int?
 )

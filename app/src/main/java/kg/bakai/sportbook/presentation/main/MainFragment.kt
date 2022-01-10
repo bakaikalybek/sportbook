@@ -25,11 +25,20 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            mainViewModel.userData.observe(viewLifecycleOwner) { user ->
+                tvUserName.text = "Привет, ${user.name}"
+                tvUserHeight.text = "${user.currentHeight.toString()} см"
+                tvUserWeight.text = "${user.currentWeight.toString()} кг"
+                tvGoalWeight.text = "Цель: ${user.goalWeight} кг"
+                val weightDifference = user.goalWeight!! - user.currentWeight!!
+                tvGoalWeightText.text = "Тебе надо набрать ещё $weightDifference кг"
 
-    }
+                val progress = (user.currentWeight!! / user.goalWeight!!) * 100
 
-    private fun subscribeToLiveData() {
-
+                progressBarWeight.progress = progress.toInt()
+            }
+        }
     }
 
 }

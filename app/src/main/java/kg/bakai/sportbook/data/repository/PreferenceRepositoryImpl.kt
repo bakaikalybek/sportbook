@@ -5,6 +5,7 @@ import kg.bakai.sportbook.data.data_source.SharedPreferencesManager
 import kg.bakai.sportbook.domain.model.FieldType
 import kg.bakai.sportbook.domain.model.LoginItem
 import kg.bakai.sportbook.domain.model.OnboardingItem
+import kg.bakai.sportbook.domain.model.User
 import kg.bakai.sportbook.domain.repository.PreferenceRepository
 
 class PreferenceRepositoryImpl(
@@ -39,18 +40,18 @@ class PreferenceRepositoryImpl(
         return listOf(
             OnboardingItem(
                 image = R.drawable.img_set_goals,
-                title = "Set Goals",
-                description = "Describe what you want to become"
+                title = "Ставь цели",
+                description = "Опиши каким ты хочешь стать"
             ),
             OnboardingItem(
                 image = R.drawable.img_record,
-                title = "Record",
-                description = "Record your progress to see how much you have done"
+                title = "Записывай прогресс",
+                description = "Записывай тренировки что видеть свой прогресс"
             ),
             OnboardingItem(
                 image = R.drawable.img_work,
-                title = "Achieve",
-                description = "Work hard and achieve your goals"
+                title = "Достигай",
+                description = "Работай усердно и достигай свои цели"
             )
         )
     }
@@ -69,5 +70,17 @@ class PreferenceRepositoryImpl(
 
     override fun isFirstTimeLaunch(): Boolean {
         return prefs.isFirstTimeLaunch()
+    }
+
+    override fun saveUserData(name: String, age: Int, height: Int, weight: Int, goalWeight: Int) {
+        prefs.saveName(name)
+        prefs.saveAge(age)
+        prefs.saveHeight(height.toFloat())
+        prefs.saveWeight(weight.toFloat())
+        prefs.saveGoalWeight(goalWeight.toFloat())
+    }
+
+    override fun fetchUserData(): User {
+        return prefs.fetchUser()
     }
 }

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.viewpager2.widget.ViewPager2
 import kg.bakai.sportbook.databinding.FragmentLoginBinding
 import kg.bakai.sportbook.presentation.MainActivity
@@ -17,7 +18,6 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private val loginViewModel by sharedViewModel<LoginViewModel>()
-    private val loginFieldsAdapter = LoginFieldsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,37 +30,38 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.apply {
-            loginViewPager.adapter = loginFieldsAdapter
-            loginViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    if (position == loginFieldsAdapter.itemCount - 1) {
-                        btnLoginNext.text = "Finish"
-                    } else {
-                        btnLoginNext.text = "Next"
-                    }
-                }
-            })
-            btnLoginNext.setOnClickListener {
-                if (loginViewPager.currentItem + 1 < loginFieldsAdapter.itemCount) {
-                    loginViewPager.currentItem = loginViewPager.currentItem + 1
-                } else {
-                    finishLogin()
-                }
+            etLoginFieldName.doOnTextChanged { text, _, _, _ ->
+                loginViewModel.name.postValue(text.toString())
             }
-        }
-        loginViewModel.slidesLogin.observe(viewLifecycleOwner) {
-            loginFieldsAdapter.submitItems(it)
+            etLoginFieldAge.doOnTextChanged { text, _, _, _ ->
+                loginViewModel.age.postValue(text.toString().toIntOrNull())
+            }
+            etLoginFieldHeight.doOnTextChanged { text, _, _, _ ->
+                loginViewModel.height.postValue(text.toString().toIntOrNull())
+            }
+            etLoginFieldWeight.doOnTextChanged { text, _, _, _ ->
+                loginViewModel.weight.postValue(text.toString().toIntOrNull())
+            }
+            etLoginFieldGoalWeight.doOnTextChanged { text, _, _, _ ->
+                loginViewModel.goalWeight.postValue(text.toString().toIntOrNull())
+            }
+            loginViewModel.isValid.observe(viewLifecycleOwner) { valid ->
+                btnStart.isEnabled = valid
+            }
+            btnStart.setOnClickListener {
+                finishLogin()
+            }
         }
     }
 
     private fun finishLogin() {
+        loginViewModel.saveProfileData()
         activity?.apply {
             startActivity(Intent(context, MainActivity::class.java))
             finish()
         }
-        loginViewModel.saveProfileData()
     }
 
 }

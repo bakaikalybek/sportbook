@@ -3,11 +3,14 @@ package kg.bakai.sportbook.di
 import android.app.Application
 import android.content.SharedPreferences
 import androidx.room.Room
+import kg.bakai.sportbook.data.data_source.DataStoreManager
 import kg.bakai.sportbook.data.data_source.SharedPreferencesManager
 import kg.bakai.sportbook.data.data_source.RecordsDao
 import kg.bakai.sportbook.data.data_source.RecordsDatabase
+import kg.bakai.sportbook.data.repository.DataStoreRepositoryImpl
 import kg.bakai.sportbook.data.repository.PreferenceRepositoryImpl
 import kg.bakai.sportbook.data.repository.RecordsRepositoryImpl
+import kg.bakai.sportbook.domain.repository.DataStoreRepository
 import kg.bakai.sportbook.domain.repository.PreferenceRepository
 import kg.bakai.sportbook.domain.repository.RecordsRepository
 import kg.bakai.sportbook.presentation.login.LoginViewModel
@@ -35,12 +38,13 @@ val databaseModule = module {
 val repositoryModule = module {
     single<RecordsRepository> { RecordsRepositoryImpl(get()) }
     single<PreferenceRepository> { PreferenceRepositoryImpl(get()) }
+    single<DataStoreRepository> { DataStoreRepositoryImpl(get()) }
 }
 
 val viewModelModule = module {
-    viewModel { MainViewModel(get()) }
+    viewModel { MainViewModel(get(), get(), get()) }
     viewModel { RecordsViewModel(get()) }
-    viewModel { LoginViewModel(get()) }
+    viewModel { LoginViewModel(get(), get()) }
 }
 
 val appModule = module {
@@ -49,4 +53,5 @@ val appModule = module {
     }
     single { getSharedPreference(androidApplication()) }
     single { SharedPreferencesManager(get()) }
+    single { DataStoreManager(get()) }
 }
